@@ -1,39 +1,49 @@
-x = []
-fx = []
-i = 0
-I = 0
-P = 0
+from math import *
+import math
 
-#inputs dos pontos do intervalo e o número de partes em que é dividido
-a = float(input('Valor de A: '))
-b = float(input('Valor de B: '))
-n = int(input('Partes divididas: '))
+def f(fx,x):#definindo a função matematica
+   f = eval(fx)
+   return f
 
-#formula ponto medio
-h = (b - a) / (n)
+def simpsonrule():
+    x = []
+    fx = []
+    i = 0
+    I = 0
+    P = 0
 
-while i < n:
-    #input para os pontos da função
-    num_x = float(input('Digite x{0}: '.format(i)))
-    num_fx = float(input('Digite fx{0}'.format(i)))
-    x.append(num_x)
-    fx.append(num_fx)
+    #inputs dos pontos do intervalo e o número de partes em que é dividido
+    a = float(input('Valor de A: '))
+    b = float(input('Valor de B: '))
+    n = int(input('Partes divididas: '))
 
-    #se o valor de i for diferente de zero, seja par e diferente do numero de partes
-    #em que o intervalo é dividido a função do pol é utilizada
-    if (i != 0) and ((i % 2) == 0) and (i != (n)):
-        P += x[i] * fx[i]
+    #formula ponto medio
+    h = (b - a) / (n)
 
-    # //               , seja impar e diferente do numero de partes
-    #em que o intervalo é dividido, a função de integração é utilizada
-    elif (i != 0) and ((i % 2) != 0) and (i != (n)):
-        I += x[i] * fx[i]
+    while i < n:
+        #input para os pontos da função
+        num_x = float(input('Digite x{0}: '.format(i)))
+        num_fx = float(input('Digite fx{0}'.format(i)))
+        x.append(num_x)
+        fx.append(num_fx)
 
-    i += 1
+        #se o valor de i for diferente de zero, seja par e diferente do numero de partes
+        #em que o intervalo é dividido a função do pol é utilizada
+        if (i != 0) and ((i % 2) == 0) and (i != (n)):
+            P += x[i] * fx[i]
 
-E = (x[0] * fx[0]) + (x[n-1] * fx[n-1])
+        # //               , seja impar e diferente do numero de partes
+        #em que o intervalo é dividido, a função de integração é utilizada
+        elif (i != 0) and ((i % 2) != 0) and (i != (n)):
+            I += x[i] * fx[i]
 
-#formula simpson
-Simpson = (h / 3) * (E + (4 * I) + (2 * P))
+        i += 1
 
-print('O valor da integral é: {0:.3f}'.format(Simpson))
+    E = (x[0] * fx[0]) + (x[n-1] * fx[n-1])
+
+    #formula simpson
+    Simpson = (h / 3) * (E + (4 * I) + (2 * P))
+
+    print('O valor da integral é: {0:.3f}'.format(Simpson))
+
+simpsonrule()
